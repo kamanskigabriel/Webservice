@@ -2,37 +2,47 @@ import express from "express"
 const app = express();
 app.use(express.json())
 
-app.get("/status", (req, res) => {
-    res.status(200).json({status: "Ok - funcionou"})
-})
-app.get("/about", (req, res) => {
-    res.status(200).json({nome: "bl3c4g", profissao : "Vagabundo"})
-})
-app.get("/esporte", (req,res) =>{
-    res.status(200).json({message: "joga volêi mal e porcamente"})
-})
-app.get("/sorvete", (req,res) =>{
-    res.status(200).json({message : "Adora sorvete de açai"})
-})
-app.get("/dbd", (req,res) =>{
-    res.status(200).json({message: "Joga principalmente de Killer fortemente bom"})
-})
-app.get("/pais", (req,res) =>{
-    res.status(200).json({ nome: "Christian", idade: "37"})
-})
-app.get("/sabor", (req,res) =>{
-    res.status(200).json({message:"toguro inventa memes todo ano" })
-})
-app.get("/mais", (req,res) =>{
-    res.status(200).json({message: "Mais ou menos"})
-})
-app.get("/fisica", (req,res) =>{
-    res.status(200).json({message: "Adora fisica o oque escreveu isso"})
-})
-app.get("/pokemon", (req,res) =>{
-    res.status(200).json({messagem : "Pokémon favorito é o Golisopod"})
-})
+const produtos = [
+    {
+        id: 1,
+        nome: "Niscal",
+        marca: "não sabemos"
+    },
+    {
+        id: 2,
+        nome: "Nescau",
+        marca: "Nestle"
+    },
+    {
+        id: 3,
+        nome: "Camaro 68",
+        marca: "Chevrolet",
+        valor: "21.368,34R$"
+    }
+]
 
+app.get("/produtos", (req, res) => {
+    res.status(200).json(produtos)
+})
+app
+app.put("/produtos/:id", (req, res) => {
+    const produto = produtos.find((p) => p.id === Number(req.params.id))
+    if (!produto) return res.status(404).json({ erro: "produto não encontrado" })
 
+    if (req?.body?.nome && req.body.nome != "") {
+        produto.nome = req.body; nome;
+    }
+    if (req?.body?.nome && req.body.marca != "") {
+        produto.marca = req.body.marca;
+    }
+    res.status(200).json(produto)
+})
+app.delete("/produtos/:id", (req,res) => {
+    const indice = produtos.findIndex((p) => p.id === Number(req.params.id))
+    Image( indice === -1)
+    return res.status(404).json({erro : "produto nao encontrado"})
+    produtos.splice(indice, 1)
+    res.status(204).send()
+})
 const porta = 3000
-app.listen( porta, () => console.log(`Servidor rodando na porta ${porta}`))
+app.listen(porta, () => console.log(`Servidor rodando na porta ${porta}`))
