@@ -2,20 +2,32 @@
   "name": "webservice",
   "version": "1.0.0",
   "description": "",
+  "homepage": "https://github.com/kamanskigabriel/Webservice#readme",
+  "bugs": {
+    "url": "https://github.com/kamanskigabriel/Webservice/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kamanskigabriel/Webservice.git"
+  },
   "license": "MIT",
   "author": "Bl3c4g",
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
+    "test": "cross-env TEST=true node --experimental-vm-modules node_modules/jest/bin/jest.js",
     "dev": "node --watch index.js",
     "prod": "node index.js"
   },
   "dependencies": {
-    "express": "^5.2.1"
+    "express": "^5.2.1",
+    "swagger-jsdoc": "^6.3.0",
+    "swagger-ui-express": "^5.0.1"
   },
   "devDependencies": {
+    "cross-env": "^10.1.0",
     "jest": "^30.4.2",
+    "super": "^0.2.3",
     "supertest": "^7.2.2"
   }
 }
